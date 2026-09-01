@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OpenCart Rescue Case</title>
+<meta name="description" content="StoreRemedy demo case study: an OpenCart store taken from Lighthouse 41 to 90 on mobile — LCP down from 30.3s to 2.9s, page weight from 5.3 MB to 480 KB.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --bg:#FAFBFC; --ink:#101B2D; --slate:#5B6B7F; --line:#DEE5EC;
+    --accent:#0C7A5A; --accent-ink:#0A6B4F; --accent-soft:#E7F3EE;
+    --panel:#0F1B2A; --panel-ink:#D7E2EE; --panel-dim:#7A8CA3;
+    --warn:#C2452D;
+    --display:"Bricolage Grotesque",Georgia,serif;
+    --body:"Public Sans",system-ui,-apple-system,sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);
+       font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:880px;margin:0 auto;padding:0 24px}
+  a{color:var(--accent-ink)}
+  h1,h2,h3{font-family:var(--display);line-height:1.15;text-wrap:balance;margin:0}
+  .eyebrow{font-family:var(--mono);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;
+           color:var(--accent-ink);margin:0 0 14px}
+  header.site{border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:18px 0}
+  .brand{font-family:var(--display);font-weight:700;font-size:19px;text-decoration:none;color:var(--ink)}
+  .nav a.back{color:var(--slate);text-decoration:none;font-size:15.5px}
+  .nav a.back:hover{color:var(--ink)}
+
+  .hero{padding:64px 0 40px}
+  .hero h1{font-size:clamp(30px,4.5vw,44px)}
+  .hero .sub{color:var(--slate);font-size:18px;max-width:36em;margin:18px 0 0}
+  .demo-note{background:var(--accent-soft);border:1px solid var(--accent);border-radius:8px;
+             padding:14px 18px;font-size:14.5px;color:var(--accent-ink);margin-top:26px}
+
+  .scores{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:44px 0}
+  @media (max-width:640px){.scores{grid-template-columns:1fr}}
+  .score-card{border:1px solid var(--line);border-radius:10px;padding:26px;background:#fff;text-align:center}
+  .score-card.after{border-color:var(--accent);background:var(--accent-soft)}
+  .score-card .label{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--slate)}
+  .score-card .big{font-family:var(--display);font-weight:700;font-size:64px;line-height:1.1;
+                   font-variant-numeric:tabular-nums;margin:8px 0 2px}
+  .score-card.before .big{color:var(--warn)}
+  .score-card.after .big{color:var(--accent-ink)}
+  .score-card .cap{color:var(--slate);font-size:14px}
+
+  section{padding:36px 0}
+  section h2{font-size:clamp(24px,3vw,30px);margin-bottom:18px}
+  .tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:#fff}
+  table{border-collapse:collapse;width:100%;font-size:15.5px;min-width:520px}
+  th,td{padding:12px 18px;text-align:left;border-bottom:1px solid var(--line)}
+  tr:last-child td{border-bottom:0}
+  th{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--slate);font-weight:500}
+  td.num{font-family:var(--mono);font-size:14.5px;font-variant-numeric:tabular-nums}
+  td .bad{color:var(--warn)}
+  td .good{color:var(--accent-ink);font-weight:600}
+
+  .did{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+  .did li{padding-left:26px;position:relative;color:var(--slate);font-size:16px}
+  .did li::before{content:"";position:absolute;left:0;top:9px;width:12px;height:12px;border-radius:3px;background:var(--accent)}
+  .did li b{color:var(--ink);font-weight:600}
+
+  .proof{display:flex;gap:14px;flex-wrap:wrap;margin-top:6px}
+  .btn{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;
+       font-weight:600;font-size:15.5px;padding:12px 22px;border-radius:6px}
+  .btn:hover{background:var(--accent-ink)}
+  .btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+  .btn.ghost:hover{border-color:var(--slate)}
+  .btn:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+  .closer{background:var(--panel);color:var(--panel-ink);border-radius:12px;padding:36px;margin:44px 0 64px}
+  .closer h2{color:#fff;margin-bottom:10px}
+  .closer p{color:var(--panel-dim);margin:0 0 22px;max-width:38em}
+  .closer .btn{background:#fff;color:var(--panel)}
+  .closer .btn:hover{background:var(--panel-ink)}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap nav">
+    <a class="brand" href="index.html">StoreRemedy</a>
+    <a class="back" href="index.html">← All services</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="hero">
+    <p class="eyebrow">Case study · OpenCart · Speed &amp; SEO</p>
+    <h1>From a 30-second hero image to a passing grade</h1>
+    <p class="sub">A stock OpenCart 2.3 store, set up the way we routinely find real ones:
+      camera-original photos uploaded as banners, a header full of accumulated third-party
+      scripts, no compression, no caching, broken SEO basics. Here is what a two-day fix
+      sprint does to numbers like that.</p>
+    <div class="demo-note"><b>Transparency note:</b> this is a demonstration store we built and
+      deliberately misconfigured to reproduce the most common mistakes from real audits — so we
+      can show the full before/after methodology with verifiable reports. Client cases are
+      published with permission as they complete.</div>
+  </div>
+
+  <div class="scores">
+    <div class="score-card before">
+      <div class="label">Before — Lighthouse mobile</div>
+      <div class="big">41</div>
+      <div class="cap">performance score</div>
+    </div>
+    <div class="score-card after">
+      <div class="label">After — Lighthouse mobile</div>
+      <div class="big">90</div>
+      <div class="cap">performance score</div>
+    </div>
+  </div>
+
+  <section>
+    <h2>Every metric, measured</h2>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>Metric</th><th>Before</th><th>After</th><th>Change</th></tr>
+        <tr><td>Largest Contentful Paint</td><td class="num"><span class="bad">30.3 s</span></td><td class="num"><span class="good">2.9 s</span></td><td class="num">−90%</td></tr>
+        <tr><td>First Contentful Paint</td><td class="num"><span class="bad">6.3 s</span></td><td class="num"><span class="good">0.9 s</span></td><td class="num">−86%</td></tr>
+        <tr><td>Speed Index</td><td class="num"><span class="bad">20.4 s</span></td><td class="num"><span class="good">1.6 s</span></td><td class="num">−92%</td></tr>
+        <tr><td>Total page weight</td><td class="num"><span class="bad">5.3 MB</span></td><td class="num"><span class="good">480 KB</span></td><td class="num">−91%</td></tr>
+        <tr><td>Server response (TTFB)</td><td class="num"><span class="bad">2.97 s</span></td><td class="num"><span class="good">0.27 s</span></td><td class="num">−91%</td></tr>
+        <tr><td>Lighthouse SEO score</td><td class="num"><span class="bad">91</span></td><td class="num"><span class="good">100</span></td><td class="num">+9</td></tr>
+        <tr><td>Best Practices score</td><td class="num"><span class="bad">79</span></td><td class="num"><span class="good">96</span></td><td class="num">+17</td></tr>
+      </table>
+    </div>
+    <div class="proof" style="margin-top:18px">
+      <a class="btn ghost" href="case/opencart-before.html">Full Lighthouse report — before</a>
+      <a class="btn ghost" href="case/opencart-after.html">Full Lighthouse report — after</a>
+    </div>
+  </section>
+
+  <section>
+    <h2>What the fix sprint actually did</h2>
+    <ul class="did">
+      <li><b>Images:</b> 5000-pixel, multi-megabyte "camera originals" resized to display
+          dimensions and re-encoded — the hero banner went from 2.9 MB to 80 KB with no
+          visible quality loss.</li>
+      <li><b>Third-party cleanup:</b> removed nine accumulated render-blocking scripts and
+          stylesheets (duplicate jQuery versions, unused font families, abandoned widgets) —
+          the kind of junk every store collects over the years.</li>
+      <li><b>Render path:</b> deferred every non-critical script, made font loading
+          asynchronous, and fixed a carousel that kept the hero image invisible for
+          4 extra seconds after it had already downloaded.</li>
+      <li><b>Server:</b> enabled gzip compression (HTML went from 25 KB to 4 KB on the wire)
+          and browser caching for static assets.</li>
+      <li><b>SEO basics:</b> real title tag instead of "Your Store", meta description,
+          missing H1, robots.txt and sitemap.xml.</li>
+    </ul>
+  </section>
+
+  <div class="closer">
+    <h2>Your store probably has the same five problems</h2>
+    <p>The Store Health Audit finds them in two business days — measurements, priorities and
+       a video walkthrough, for $150, credited toward any fix.</p>
+    <a class="btn" href="index.html#audit">Get your store audited</a>
+  </div>
+</main>
+
+</body>
+</html>
