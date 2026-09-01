@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>StoreRemedy</title>
+<meta name="description" content="StoreRemedy — store health, measured and fixed. Speed, SEO and AI automation for small online stores. OpenCart, WooCommerce and Shopify — fixed prices, measurable results.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --bg:#FAFBFC; --ink:#101B2D; --slate:#5B6B7F; --line:#DEE5EC;
+    --accent:#0C7A5A; --accent-ink:#0A6B4F; --accent-soft:#E7F3EE;
+    --panel:#0F1B2A; --panel-ink:#D7E2EE; --panel-dim:#7A8CA3;
+    --warn:#C2452D;
+    --display:"Bricolage Grotesque",Georgia,serif;
+    --body:"Public Sans",system-ui,-apple-system,sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);
+       font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  a{color:var(--accent-ink)}
+  h1,h2,h3{font-family:var(--display);line-height:1.12;text-wrap:balance;margin:0}
+  .eyebrow{font-family:var(--mono);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;
+           color:var(--accent-ink);margin:0 0 14px}
+  .btn{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;
+       font-weight:600;font-size:16px;padding:13px 26px;border-radius:6px}
+  .btn:hover{background:var(--accent-ink)}
+  .btn:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+  .btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+  .btn.ghost:hover{border-color:var(--slate)}
+
+  header.site{border-bottom:1px solid var(--line);background:var(--bg)}
+  .nav{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:18px 0}
+  .brand{font-family:var(--display);font-weight:700;font-size:19px;text-decoration:none;color:var(--ink)}
+  .nav ul{display:flex;gap:28px;list-style:none;margin:0;padding:0}
+  .nav ul a{color:var(--slate);text-decoration:none;font-size:15.5px}
+  .nav ul a:hover{color:var(--ink)}
+  .nav .btn{padding:9px 18px;font-size:15px}
+  @media (max-width:720px){.nav ul{display:none}}
+
+  .hero{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;padding:76px 0 68px}
+  .hero h1{font-size:clamp(34px,5vw,52px);font-weight:700}
+  .hero .sub{color:var(--slate);font-size:19px;max-width:32em;margin:20px 0 30px}
+  .hero .cta-row{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .platforms{margin-top:34px;font-family:var(--mono);font-size:13.5px;color:var(--slate);letter-spacing:.04em}
+  @media (max-width:880px){.hero{grid-template-columns:1fr;gap:40px;padding:52px 0}}
+
+  .report{background:var(--panel);color:var(--panel-ink);border-radius:10px;padding:26px 28px;
+          font-family:var(--mono);font-size:13.5px;line-height:1.75;
+          box-shadow:0 24px 48px -24px rgba(16,27,45,.35)}
+  .report .tag{display:inline-block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+               color:var(--panel-dim);border:1px solid #24354B;border-radius:4px;padding:3px 9px;margin-bottom:16px}
+  .report .row{display:flex;justify-content:space-between;gap:16px;border-bottom:1px solid #1B2A3E;padding:7px 0}
+  .report .row:last-of-type{border-bottom:0}
+  .report .k{color:var(--panel-dim)}
+  .report .bad{color:#E58D77}
+  .report .good{color:#6FCFA9}
+  .report .arrow{color:var(--panel-dim);padding:0 4px}
+  .report .foot{margin-top:14px;padding-top:14px;border-top:1px solid #1B2A3E;color:var(--panel-dim);font-size:12.5px}
+
+  .strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:#fff}
+  .strip .wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+  .stat{padding:26px 28px;border-left:1px solid var(--line)}
+  .stat:first-child{border-left:0}
+  .stat b{display:block;font-family:var(--display);font-size:26px;font-weight:700;
+          font-variant-numeric:tabular-nums;margin-bottom:4px}
+  .stat span{color:var(--slate);font-size:14.5px;line-height:1.45;display:block}
+  @media (max-width:720px){.strip .wrap{grid-template-columns:1fr}.stat{border-left:0;border-top:1px solid var(--line)}.stat:first-child{border-top:0}}
+
+  section{padding:72px 0}
+  section h2{font-size:clamp(26px,3.4vw,36px);margin-bottom:12px}
+  .lede{color:var(--slate);max-width:38em;margin:0 0 40px}
+
+  .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+  @media (max-width:760px){.cards{grid-template-columns:1fr}}
+  .card{background:#fff;border:1px solid var(--line);border-radius:8px;padding:28px;display:flex;flex-direction:column;gap:10px}
+  .card h3{font-size:20px}
+  .card .price{font-family:var(--mono);font-size:14px;color:var(--accent-ink);font-weight:500}
+  .card p{margin:0;color:var(--slate);font-size:15.5px}
+  .card.lead{border-color:var(--accent);background:var(--accent-soft)}
+  .card.lead .note{font-size:13.5px;color:var(--accent-ink)}
+
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;counter-reset:step}
+  @media (max-width:760px){.steps{grid-template-columns:1fr}}
+  .step{background:#fff;border:1px solid var(--line);border-radius:8px;padding:26px}
+  .step::before{counter-increment:step;content:counter(step,decimal-leading-zero);
+                font-family:var(--mono);font-size:13px;color:var(--accent-ink);
+                display:block;margin-bottom:12px;letter-spacing:.1em}
+  .step h3{font-size:18px;margin-bottom:8px}
+  .step p{margin:0;color:var(--slate);font-size:15px}
+
+  .why{display:grid;grid-template-columns:repeat(2,1fr);gap:14px 32px;padding:0;margin:0;list-style:none}
+  @media (max-width:720px){.why{grid-template-columns:1fr}}
+  .why li{padding-left:26px;position:relative;color:var(--slate);font-size:16px}
+  .why li::before{content:"";position:absolute;left:0;top:9px;width:12px;height:12px;
+                  border-radius:3px;background:var(--accent)}
+  .why li b{color:var(--ink);font-weight:600}
+
+  .faq details{border-bottom:1px solid var(--line);padding:4px 0}
+  .faq summary{cursor:pointer;font-weight:600;padding:16px 0;list-style:none;display:flex;justify-content:space-between;gap:16px}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:"+";font-family:var(--mono);color:var(--slate);font-size:20px;line-height:1.3}
+  .faq details[open] summary::after{content:"–"}
+  .faq p{margin:0 0 18px;color:var(--slate);max-width:44em}
+
+  .closer{background:var(--panel);color:var(--panel-ink)}
+  .closer h2{color:#fff}
+  .closer .lede{color:var(--panel-dim)}
+  .closer .btn{background:#fff;color:var(--panel)}
+  .closer .btn:hover{background:var(--panel-ink)}
+  .closer .mail{font-family:var(--mono);font-size:14.5px;color:var(--panel-dim);margin-top:18px;display:block}
+  .closer .mail a{color:var(--panel-ink)}
+
+  footer.site{padding:26px 0;font-size:13.5px;color:var(--slate)}
+  footer.site .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap nav">
+    <a class="brand" href="#">StoreRemedy</a>
+    <ul>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <a class="btn" href="#audit">Get an audit</a>
+  </div>
+</header>
+
+<main>
+  <div class="wrap hero">
+    <div>
+      <p class="eyebrow">E-commerce speed · SEO · AI automation</p>
+      <h1>Slow, invisible stores lose sales every day. We fix them.</h1>
+      <p class="sub">Technical maintenance, speed &amp; SEO fixes, and AI automation for small
+        online stores — fixed prices, two-week turnarounds, and before/after numbers you can verify.</p>
+      <div class="cta-row">
+        <a class="btn" href="#audit">Get your store audited</a>
+        <a class="btn ghost" href="#services">See services &amp; pricing</a>
+      </div>
+      <p class="platforms">OPENCART · WOOCOMMERCE · SHOPIFY</p>
+    </div>
+    <div class="report" aria-label="Sample audit report">
+      <span class="tag">Sample audit report</span>
+      <div class="row"><span class="k">mobile load time</span><span><span class="bad">6.8s</span><span class="arrow">→</span><span class="good">1.9s</span></span></div>
+      <div class="row"><span class="k">server response</span><span><span class="bad">1.4s</span><span class="arrow">→</span><span class="good">0.3s</span></span></div>
+      <div class="row"><span class="k">homepage weight</span><span><span class="bad">9.2 MB</span><span class="arrow">→</span><span class="good">1.1 MB</span></span></div>
+      <div class="row"><span class="k">core web vitals</span><span><span class="bad">failing</span><span class="arrow">→</span><span class="good">passing</span></span></div>
+      <div class="row"><span class="k">product pages indexed</span><span><span class="bad">41%</span><span class="arrow">→</span><span class="good">98%</span></span></div>
+      <div class="foot">every engagement starts and ends with numbers like these — measured on your store, not promised</div>
+    </div>
+  </div>
+
+  <div class="strip">
+    <div class="wrap">
+      <div class="stat"><b>53%</b><span>of mobile visitors abandon a page that takes over 3 seconds to load (Google research)</span></div>
+      <div class="stat"><b>2 weeks</b><span>typical fix sprint — scoped from the audit, delivered at a fixed price</span></div>
+      <div class="stat"><b>1 person</b><span>you work with the developer directly — no ticket queue, replies within hours</span></div>
+    </div>
+  </div>
+
+  <section id="services">
+    <div class="wrap">
+      <p class="eyebrow">Services</p>
+      <h2>Start small. Scale only if the numbers earn it.</h2>
+      <p class="lede">Every engagement begins with a measured audit, so you always know
+        what's broken and what it's worth before spending on fixes.</p>
+      <div class="cards">
+        <div class="card lead">
+          <h3>Store Health Audit</h3>
+          <span class="price">$150 one-time</span>
+          <p>Speed, SEO and technical audit of your store with a prioritized fix list and a
+             video walkthrough. You can hand it to any developer — or to me.</p>
+          <p class="note">Fully credited toward any package below.</p>
+        </div>
+        <div class="card">
+          <h3>Fix Sprint</h3>
+          <span class="price">$600–1,500 fixed</span>
+          <p>The audit's top issues fixed in two weeks: load speed, Core Web Vitals,
+             broken SEO basics, mobile experience.</p>
+        </div>
+        <div class="card">
+          <h3>Care Plan</h3>
+          <span class="price">$500–900 / month</span>
+          <p>Ongoing maintenance: updates, monitoring, small fixes, continuous SEO
+             and priority support. Cancel any month.</p>
+        </div>
+        <div class="card">
+          <h3>AI Automation</h3>
+          <span class="price">from $800</span>
+          <p>Product descriptions generated for your whole catalog, support chatbots trained
+             on your products, order-flow automations. Scoped per project.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="process" style="padding-top:0">
+    <div class="wrap">
+      <p class="eyebrow">Process</p>
+      <h2>Measure, fix, keep it fixed</h2>
+      <p class="lede">The order matters: no fixes are sold before the audit proves they're needed.</p>
+      <div class="steps">
+        <div class="step"><h3>Audit</h3><p>We measure your store — speed, rankings, technical health —
+          and record a walkthrough of what's costing you sales, in plain language.</p></div>
+        <div class="step"><h3>Fix sprint</h3><p>We agree on scope and a fixed price. Two weeks later
+          you get the same measurements re-run, so the improvement is verifiable.</p></div>
+        <div class="step"><h3>Care plan</h3><p>Optional: we keep the store fast, updated and monitored
+          month to month, and keep improving SEO while you run the business.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <p class="eyebrow">Why StoreRemedy</p>
+      <h2>Senior output, one accountable person</h2>
+      <p class="lede" style="margin-bottom:28px">StoreRemedy is a one-developer studio — deliberately.
+        You get depth and a direct line instead of an account manager.</p>
+      <ul class="why">
+        <li><b>Platform depth.</b> 10+ years around e-commerce platforms; OpenCart specialist, fluent in WooCommerce and Shopify.</li>
+        <li><b>AI-augmented workflow.</b> We ship in days what agencies quote weeks for — and pass the saving on.</li>
+        <li><b>Numbers, not adjectives.</b> Every project starts and ends with the same measurements, run on your store.</li>
+        <li><b>Direct line.</b> You talk to the person doing the work. Replies within hours on business days.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="faq" style="padding-top:0">
+    <div class="wrap faq">
+      <p class="eyebrow">FAQ</p>
+      <h2 style="margin-bottom:24px">Questions store owners ask</h2>
+      <details>
+        <summary>What access do you need to my store?</summary>
+        <p>For the audit — none: it runs on the public site. For fixes, a staging copy or admin
+           access with a separate account you can revoke any time. Every change is documented.</p>
+      </details>
+      <details>
+        <summary>What if the audit finds nothing serious?</summary>
+        <p>Then we tell you exactly that, and you've spent $150 to learn your store is healthy —
+           with a report you can keep. We don't invent work; the audit is valuable either way.</p>
+      </details>
+      <details>
+        <summary>My store isn't OpenCart, WooCommerce or Shopify. Can you still help?</summary>
+        <p>Usually yes — speed and SEO problems are similar across platforms. Send the link
+           and we'll tell you honestly whether we're the right fit before you pay anything.</p>
+      </details>
+      <details>
+        <summary>How do payments work?</summary>
+        <p>Invoice with card or bank transfer (Wise/Payoneer), or through Upwork if you prefer
+           its escrow protection. Fixed prices are agreed in writing before work starts.</p>
+      </details>
+    </div>
+  </section>
+
+  <section class="closer" id="audit">
+    <div class="wrap">
+      <p class="eyebrow" style="color:#6FCFA9">Get started</p>
+      <h2>Find out what your store is losing</h2>
+      <p class="lede">Send us your store link. Within two business days you'll get the
+        Store Health Audit — measurements, priorities, and a video walkthrough.</p>
+      <a class="btn" href="mailto:wadim@matsenyuk.de?subject=Store%20audit%20request&body=Hi%2C%0A%0AMy%20store%3A%20https%3A%2F%2F%0APlatform%20(if%20known)%3A%20%0A%0AWhat%20bothers%20me%20most%3A%20">Request the audit — $150</a>
+      <span class="mail">or email directly: <a href="mailto:wadim@matsenyuk.de">wadim@matsenyuk.de</a></span>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <span>© 2026 StoreRemedy</span>
+    <span>Store health, measured &amp; fixed — speed · SEO · AI automation</span>
+  </div>
+</footer>
+
+</body>
+</html>
